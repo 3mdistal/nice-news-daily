@@ -49,7 +49,6 @@
   <div class="messages">
     {#each messages as message}
       <div class="message {message.role}">
-        <p class="sender">{message.role === 'user' ? 'You' : 'DeepSeek R1'}</p>
         <p class="content">{@html marked(message.content)}</p>
       </div>
     {/each}
@@ -129,7 +128,7 @@
   }
 
   .message.assistant {
-    background-color: white;
+    background-color: azure;
     border: 1px solid #e2e8f0;
     align-self: flex-start;
     max-width: 80%;
@@ -139,6 +138,14 @@
     font-weight: 600;
     margin-bottom: 0.5rem;
     color: #1e293b;
+  }
+
+  .content {
+    line-height: 1.5;
+
+    & :global(li) {
+      margin-bottom: 0.5rem;
+    }
   }
 
   .loading {
