@@ -10,7 +10,7 @@
 </script>
 
 <div class="container">
-  <h1>DeepSeek R1 Chat</h1>
+  <h1>DeepSeek Chat</h1>
   
   <div class="messages" bind:this={messagesContainer}>
     {#each $messages as message}
@@ -20,7 +20,7 @@
     {/each}
     {#if $isLoading}
       <div class="loading">
-        <p>DeepSeek R1 is thinking...</p>
+        <p>Sending message...</p>
       </div>
     {/if}
   </div>
