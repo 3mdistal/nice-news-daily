@@ -76,107 +76,131 @@
 </div>
 
 <style>
+  :global(*) {
+    box-sizing: border-box;
+  }
+
   :global(body) {
     margin: 0;
     font-family: system-ui, -apple-system, sans-serif;
+    background-color: #f8fafc;
+    height: 100vh;
   }
 
   .container {
     max-width: 42rem;
     margin: 0 auto;
-    padding: 1rem;
+    padding: 1rem 2rem;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
   }
 
   h1 {
     font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 1rem;
+    text-align: center;
+    color: #1e293b;
   }
 
   .messages {
+    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 1rem;
     margin-bottom: 1rem;
+    overflow-y: auto;
+    padding: 0.5rem;
   }
 
   .message {
-    padding: 1rem;
-    border-radius: 0.5rem;
+    padding: 1.25rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   }
 
   .message.user {
-    background-color: #e6f3ff;
+    background-color: white;
+    border: 1px solid #e2e8f0;
+    align-self: flex-end;
+    max-width: 80%;
   }
 
   .message.assistant {
-    background-color: #f3f4f6;
+    background-color: white;
+    border: 1px solid #e2e8f0;
+    align-self: flex-start;
+    max-width: 80%;
   }
 
   .sender {
     font-weight: 600;
-  }
-
-  .content {
-    white-space: pre-wrap;
-  }
-
-  .content :global(p) {
-    margin: 0.5em 0;
-  }
-
-  .content :global(pre) {
-    background: #f4f4f4;
-    padding: 1em;
-    border-radius: 4px;
-    overflow-x: auto;
-  }
-
-  .content :global(code) {
-    background: #f4f4f4;
-    padding: 0.2em 0.4em;
-    border-radius: 3px;
-    font-size: 0.9em;
+    margin-bottom: 0.5rem;
+    color: #1e293b;
   }
 
   .loading {
     padding: 1rem;
     border-radius: 0.5rem;
-    background-color: #f9fafb;
+    background-color: white;
+    border: 1px solid #e2e8f0;
+    text-align: center;
   }
 
   .loading p {
     font-weight: 600;
-    color: #6b7280;
+    color: #64748b;
   }
 
   .input-form {
     display: flex;
-    gap: 0.5rem;
+    gap: 0.75rem;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 0.75rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
   }
 
   input {
     flex: 1;
-    padding: 0.5rem;
-    border: 1px solid #d1d5db;
-    border-radius: 0.5rem;
+    padding: 0.75rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+  }
+
+  input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
   }
 
   button {
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 1.5rem;
     background-color: #3b82f6;
     color: white;
     border: none;
-    border-radius: 0.5rem;
+    border-radius: 0.75rem;
     cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
   }
 
   button:hover {
     background-color: #2563eb;
+    transform: translateY(-1px);
+  }
+
+  button:active {
+    transform: translateY(0);
   }
 
   button:disabled {
     background-color: #93c5fd;
     cursor: not-allowed;
+    transform: none;
   }
 </style>
