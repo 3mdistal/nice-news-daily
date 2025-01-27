@@ -11,13 +11,15 @@
     const userMessage = input;
     input = '';
     isLoading = true;
+    
+    messages = [...messages, { role: 'user', content: userMessage }];
 
     try {
       const response = await fetch('/api/deepseek', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          messages: [...messages, { role: 'user', content: userMessage }]
+          messages: messages
         })
       });
 
