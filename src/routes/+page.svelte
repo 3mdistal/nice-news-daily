@@ -28,7 +28,7 @@
   <form onsubmit={handleSubmit} class="input-form">
     <input
       bind:value={$input}
-      placeholder="Ask DeepSeek R1 something..."
+      placeholder="Ask DeepSeek something..."
       disabled={$isLoading}
       aria-label="Chat input"
     />
