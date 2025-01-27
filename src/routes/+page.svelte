@@ -1,60 +1,24 @@
 <script lang="ts">
   import { marked } from 'marked';
-  let messages = $state<Array<{ role: string; content: string }>>([]);
-  let input = $state('');
-  let isLoading = $state(false);
+  import { useChat } from '@ai-sdk/svelte';
 
-  async function handleSubmit(event: Event) {
-    event.preventDefault();
-    if (!input.trim()) return;
+  const { messages, input, handleSubmit, isLoading } = useChat({
+    api: '/api/deepseek'
+  });
 
-    const userMessage = input;
-    input = '';
-    isLoading = true;
-    
-    messages = [...messages, { role: 'user', content: userMessage }];
-
-    try {
-      const response = await fetch('/api/deepseek', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          messages: messages
-        })
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to get response');
-      }
-
-      const data = await response.json();
-      if (data.error) {
-        throw new Error(data.error);
-      }
-
-      messages = data.messages;
-    } catch (error) {
-      console.error('Error:', error);
-      messages = [...messages, { 
-        role: 'assistant', 
-        content: 'Sorry, there was an error processing your request.' 
-      }];
-    } finally {
-      isLoading = false;
-    }
-  }
+  let messagesContainer: HTMLDivElement;
 </script>
 
 <div class="container">
   <h1>DeepSeek R1 Chat</h1>
   
-  <div class="messages">
-    {#each messages as message}
+  <div class="messages" bind:this={messagesContainer}>
+    {#each $messages as message}
       <div class="message {message.role}">
         <p class="content">{@html marked(message.content)}</p>
       </div>
     {/each}
-    {#if isLoading}
+    {#if $isLoading}
       <div class="loading">
         <p>DeepSeek R1 is thinking...</p>
       </div>
@@ -63,14 +27,12 @@
 
   <form onsubmit={handleSubmit} class="input-form">
     <input
-      bind:value={input}
+      bind:value={$input}
       placeholder="Ask DeepSeek R1 something..."
-      disabled={isLoading}
+      disabled={$isLoading}
+      aria-label="Chat input"
     />
-    <button 
-      type="submit" 
-      disabled={isLoading}
-    >
+    <button type="submit" disabled={$isLoading}>
       Send
     </button>
   </form>

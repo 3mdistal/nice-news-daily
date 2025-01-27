@@ -37,6 +37,7 @@
 		"vitest": "^3.0.0"
 	},
 	"dependencies": {
+		"@ai-sdk/deepseek": "^0.1.6",
 		"@ai-sdk/svelte": "^1.1.5",
 		"ai": "^4.1.8",
 		"marked": "^15.0.6",
